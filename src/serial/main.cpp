@@ -33,10 +33,10 @@ int main(int argc, char** argv) {
         exit(1);
     }
 
-    // Server port number taken as a command line argument
+   
     portno = atoi(argv[1]);
 
-    // Create a Socket for the server
+  
     int serverfd = socket(AF_INET, SOCK_STREAM, 0);
     if (serverfd < 0) {
         error("Error at socket creation");
@@ -45,18 +45,18 @@ int main(int argc, char** argv) {
     int option = 1;
     setsockopt(serverfd, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
 
-    // Bind the created socket to a port
+
     server_sockaddr.sin_port = htons(portno);
     if (bind(serverfd, (struct sockaddr*)&server_sockaddr, sizeof(server_sockaddr)) < 0) {
         error("Error at binding to port");
     }
 
-    // Listen for connections from some remote client
+
     if (listen(serverfd, 5) < 0) {
         error("Error at listening");
     }
 
-    // Accept connection from a client
+
     int acceptfd = accept(serverfd, (struct sockaddr*)&client_sockaddr, &client_socklen);
     if (acceptfd < 0) {
         error("Error at accepting connection");
